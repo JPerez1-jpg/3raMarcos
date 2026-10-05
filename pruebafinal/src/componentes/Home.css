@@ -1,0 +1,14 @@
+.contenedor-boton-home{
+    width: 20%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    button {
+    width: 80%;
+    height: 20%;
+    border-radius: 50px;
+}
+}
+
