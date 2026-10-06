@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {Usuarios} = require('../models/Usuarios');
+const {Usuarios} = require('../models/usuarios');
 const clave = "spiderman"
 
 const verificar_Permisos = async (req, res, next) => {

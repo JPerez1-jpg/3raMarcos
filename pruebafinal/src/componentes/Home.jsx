@@ -11,6 +11,7 @@ function Home() {
     const [error, setError] = useState(null)
     const [pushNotifications, setPushNotifications] = useState(false)
     const [emailNotifications, setEmailNotifications] = useState(false)
+    /*const [isActive, setisActive] = useState(true)*/
     const navigate = useNavigate()
     
     const BuscarUsuario = async (token) => {
@@ -137,6 +138,38 @@ function Home() {
     }
 }
 
+
+
+/*
+    const CambiarActivacion = async () => {
+    const token = localStorage.getItem('token')
+    try {
+        const response = await axios.put("http://localhost:3000/Usuarios/Activo",
+            {
+                isActive
+            },
+            {
+                headers: { authorization: token }
+            }
+        )
+
+        const usuarioBD = response.data.user;
+
+        setUser(usuarioBD)
+        
+        setisActive(Boolean(usuarioBD?.isActive))
+        console.log(usuarioBD);
+        
+
+    } catch (error) {
+        console.error("Error en la petición:", error)
+        if (error.response) {
+            setError(error.response.data)
+        }
+    }
+}
+*/
+
     return (<>
         
 
@@ -153,9 +186,6 @@ function Home() {
                 <div className='contenedor-checkbox-register'>
                     <div className='contenedor-checkbox-input-register'>
                         <input type="checkbox" checked={pushNotifications} onChange={(e)=> setPushNotifications(e.target.checked)} /> <p>Notificaciones por Celular</p>
-                    </div>
-                    <div>
-                        <input type="checkbox" checked={Cookies} onChange={(e) => setCookies(e.target.checked)} /> <p>Cookies?</p>
                     </div>
                     <div className='contenedor-checkbox-input-register'> 
                         <input type="checkbox" checked={emailNotifications} onChange={(e)=> setEmailNotifications(e.target.checked)} /> <p>Notificaciones por Email</p>
@@ -178,3 +208,14 @@ function Home() {
 }
 
 export default Home
+
+/*
+<div>
+    <div>
+        <input type="checkbox" checked={isActive} onChange={(e)=> setisActive(e.target.checked)} /> <p>Usuario Activo</p>
+    </div>
+    <div>
+        <button onClick={()=> CambiarActivacion()}>Cambiar Activacion</button>
+    </div>
+</div>
+*/

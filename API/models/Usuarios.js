@@ -73,6 +73,13 @@ const Usuarios = sequelize.define('Usuarios', {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
+    /*
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        default: true,
+    },
+    */
 },{
     //Desactivo timestamps para no tener que ver todos los CreatedAt y UpdatedAt
     tableName: "usuarios",

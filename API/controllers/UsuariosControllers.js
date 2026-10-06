@@ -1,4 +1,4 @@
-const {Usuarios} = require('../models/Usuarios');
+const {Usuarios} = require('../models/usuarios');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -16,7 +16,7 @@ const getUsuarios = async (_req, res) => {
 
 const Registrarse = async (req, res) => {
     try {
-        const {nombre, apellido, email, contraseña, emailNotifications, pushNotifications} = req.body
+        const {nombre, apellido, email, contraseña, emailNotifications, pushNotifications, /*isActive*/} = req.body
 
         if (!nombre || !apellido || !email || !contraseña){
             return res.status(400).json({message: "Parámetros incompletos o incorrectos"})
@@ -40,10 +40,12 @@ const Registrarse = async (req, res) => {
             permisosArray: ["Loguearse"],
             isDeleted: false,
             pushNotifications,
-            emailNotifications
+            emailNotifications,
+            /*isActive*/
         })
         console.log(user.emailNotifications)
         console.log(user.pushNotifications)
+        /*console.log(user.isActive)*/
         return res.status(201).json({message: "Usuario creado: ", user})
     } catch (error) {
         return res.status(500).json({error: error.message});
@@ -265,6 +267,33 @@ const CambiarConfiguracion = async (req, res) => {
     }
 }
 
+/*
+const CambiarActivo = async (req, res) => {
+    try {
+        const id = req.user.id
+        const {isActive} = req.body
+
+        const user = await Usuarios.findByPk(id)
+        if (!user){
+            return res.status(404).json({message: "Usuario no encontrado"})
+        }
+
+        if (isActive !== undefined){
+            user.isActive = isActive;
+        } 
+
+        await user.save()
+        console.log(user.isActive);
+
+        res.status(200).json({message: "Configuracion cambiada: ", user})
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+}
+
+
+*/
+
 
 module.exports = {
     getUsuarios,
@@ -276,5 +305,6 @@ module.exports = {
     Verificacion,
     Vermensajesecreto,
     BloquearCuenta,
-    CambiarConfiguracion
+    CambiarConfiguracion,
+    /*CambiarActivo*/
 }

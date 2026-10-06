@@ -11,6 +11,8 @@ function Registrar() {
     const [user, setUser] = useState({})
     const [pushNotifications, setPushNotifications] = useState(false)
     const [emailNotifications, setEmailNotifications] = useState(false)
+    /*const [isActive, setisActive] = useState(true)*/
+
 
     const Registrarse = async (email, contraseña, nombre, apellido, emailNotifications, pushNotifications)=> {
         try {
@@ -23,7 +25,8 @@ function Registrar() {
                 email,
                 contraseña,
                 pushNotifications,
-                emailNotifications
+                emailNotifications,
+                /*isActive*/
             })
 
             setUser(response.data)
@@ -33,6 +36,7 @@ function Registrar() {
             setContraseña('')
             setPushNotifications(false)
             setEmailNotifications(false)
+            /*setisActive(true)*/
         } catch (error) {
             console.error("Error en la petición:", error)
             if (error.response){
@@ -62,7 +66,7 @@ function Registrar() {
                 </div>
             </div>
             <div className='contenedor-boton-register'>
-                <button type='button' onClick={()=>{Registrarse(email, contraseña, nombre, apellido, pushNotifications, emailNotifications)}}>Enviar</button>
+                <button type='button' onClick={()=>{Registrarse(email, contraseña, nombre, apellido, pushNotifications, emailNotifications, /*isActive*/)}}>Enviar</button>
             </div>
             <p>Mensaje: {user.message}</p>
             <p>Bienvenido: {user?.user?.nombre}</p>
@@ -71,3 +75,10 @@ function Registrar() {
 }
 
 export default Registrar
+
+
+/*
+<div>
+    <input type="checkbox" checked={isActive} onChange={(e)=> setisActive(e.target.checked)} /> <p>Actividad</p>
+</div>
+*/
